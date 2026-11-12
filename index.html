@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZM IT Solutions | Network, Security, Server & Biometric IT Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        zm: {
+                            navy: '#07192f',
+                            dark: '#0c2340',
+                            blue: '#0056b3',
+                            lightBlue: '#0088ff',
+                            cyan: '#00c2ff',
+                            zkGreen: '#5cb85c',
+                            zkDark: '#2b343b'
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 25px rgba(0, 136, 255, 0.35)',
+                        'zk-glow': '0 0 25px rgba(92, 184, 92, 0.45)',
+                        'card': '0 10px 30px -5px rgba(7, 25, 47, 0.08), 0 4px 12px -2px rgba(7, 25, 47, 0.04)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles for flyer-inspired diagonal cuts, hardware visuals & animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at 80% 20%, rgba(0, 136, 255, 0.22) 0%, transparent 45%),
+                        radial-gradient(circle at 20% 80%, rgba(0, 194, 255, 0.15) 0%, transparent 40%),
+                        linear-gradient(135deg, #051324 0%, #0a223e 55%, #0d2e52 100%);
+        }
+
+        .circuit-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .flyer-ribbon {
+            clip-path: polygon(0 0, 95% 0, 100% 100%, 0% 100%);
+        }
+
+        .diagonal-banner {
+            clip-path: polygon(2% 0%, 100% 0%, 98% 100%, 0% 100%);
+        }
+
+        @media (max-width: 768px) {
+            .diagonal-banner {
+                clip-path: none;
+            }
+        }
+
+        /* Biometric scanner laser animation */
+        @keyframes scanLine {
+            0% { top: 8%; opacity: 0.4; }
+            50% { top: 82%; opacity: 1; }
+            100% { top: 8%; opacity: 0.4; }
+        }
+
+        .scanner-laser {
+            position: absolute;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: #4ade80;
+            box-shadow: 0 0 8px 2px #22c55e;
+            animation: scanLine 2.2s ease-in-out infinite;
+        }
+
+        /* Pulse LED indicator */
+        @keyframes pulseLed {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.45; transform: scale(0.92); }
+        }
+
+        .led-blink {
+            animation: pulseLed 1.8s infinite;
+        }
+
+        /* Highlight pulse when form is pre-filled from a service click */
+        @keyframes formHighlight {
+            0% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.7); }
+            70% { box-shadow: 0 0 0 18px rgba(0, 86, 179, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0); }
+        }
+
+        .form-pulse-highlight {
+            animation: formHighlight 1.2s ease-out;
+        }
+
+        /* Print styles for receipt */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printableReceipt, #printableReceipt * {
+                visibility: visible;
+            }
+            #printableReceipt {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-zm-blue selection:text-white">
+
+    <!-- ================= TOP ANNOUNCEMENT / SUPPORT BAR ================= -->
+    <div class="bg-zm-navy text-slate-300 text-xs border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span class="inline-flex items-center text-emerald-400 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 led-blink"></span>
+                    On-Site &amp; 24/7 Remote IT Support Available
+                </span>
+                <span class="hidden md:inline text-slate-600">|</span>
+                <span class="hidden md:inline-flex items-center text-slate-300">
+                    <i class="fa-solid fa-shield-halved text-zm-cyan mr-1.5"></i>
+                    Reliable &bull; Secure &bull; Efficient
+                </span>
+            </div>
+            <div class="flex items-center space-x-4 ml-auto">
+                <a href="tel:+923157732658" class="hover:text-white transition flex items-center">
+                    <i class="fa-solid fa-phone-volume text-zm-cyan mr-1.5"></i>
+                    <span>+92 315 7732658</span>
+                </a>
+                <span class="text-slate-600">|</span>
+                <a href="mailto:support@zmitsolutions.com" class="hover:text-white transition hidden sm:flex items-center">
+                    <i class="fa-solid fa-envelope text-zm-cyan mr-1.5"></i>
+                    <span>zmitsolutions@gmail.com</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= STICKY NAVIGATION BAR ================= -->
+    <header id="navbar" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200/80 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center space-x-3 group">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-zm-blue to-zm-navy flex items-center justify-center text-white shadow-md group-hover:shadow-glow transition">
+                        <span class="font-black text-lg tracking-tighter">ZM</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center">
+                            <span class="text-xl font-extrabold tracking-tight text-zm-navy">ZM <span class="text-zm-blue">IT Solutions</span></span>
+                        </div>
+                        <p class="text-[11px] font-medium text-slate-500 -mt-0.5 tracking-wide uppercase">Network &bull; Security &bull; Systems</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#home" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-zm-blue hover:bg-blue-50/60 transition">Home</a>
+                    <a href="#services" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-zm-blue hover:bg-blue-50/60 transition">Our Services</a>
+                    <a href="#zkteco-spotlight" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-emerald-600 hover:bg-emerald-50/60 transition flex items-center">
+                        <span class="w-2 h-2 rounded-full bg-zm-zkGreen mr-1.5"></span>ZKTeco Biometrics
+                    </a>
+                    <a href="#about" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-zm-blue hover:bg-blue-50/60 transition">About Us</a>
+                    <a href="#contact" class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-zm-blue hover:bg-blue-50/60 transition">Contact Us</a>
+                </nav>
+
+                <!-- Action Buttons (Inquiries Counter + CTA) -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <button onclick="scrollToInquiriesPanel()" class="relative inline-flex items-center px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 transition" title="View Submitted Service Requests">
+                        <i class="fa-solid fa-clipboard-list text-zm-blue mr-1.5 text-sm"></i>
+                        <span>Requests</span>
+                        <span id="navInquiryCount" class="ml-1.5 px-1.5 py-0.5 text-[11px] rounded-full bg-zm-blue text-white font-mono">0</span>
+                    </button>
+
+                    <a href="#contact" class="inline-flex items-center px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-zm-blue to-zm-lightBlue hover:from-blue-700 hover:to-zm-blue shadow-md hover:shadow-glow transition transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-headset mr-2"></i>
+                        Book a Service
+                    </a>
+                </div>
+
+                <!-- Mobile Hamburger Button -->
+                <div class="flex items-center space-x-2 md:hidden">
+                    <button onclick="scrollToInquiriesPanel()" class="relative p-2.5 rounded-xl bg-slate-100 text-slate-700 border border-slate-200" aria-label="Submitted Requests">
+                        <i class="fa-solid fa-clipboard-list text-zm-blue"></i>
+                        <span id="mobileNavInquiryCount" class="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-[10px] rounded-full bg-zm-blue text-white font-bold">0</span>
+                    </button>
+                    <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none border border-slate-200" aria-label="Toggle Menu">
+                        <i id="mobileMenuIcon" class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-5 space-y-2 shadow-xl">
+            <a href="#home" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 hover:bg-blue-50 hover:text-zm-blue">Home</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 hover:bg-blue-50 hover:text-zm-blue">Our Services (All 8 Solutions)</a>
+            <a href="#zkteco-spotlight" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-emerald-700 bg-emerald-50/70">ZKTeco Biometric Attendance</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 hover:bg-blue-50 hover:text-zm-blue">About ZM IT Solutions</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-800 hover:bg-blue-50 hover:text-zm-blue">Contact Us</a>
+            <div class="pt-2">
+                <a href="#contact" onclick="toggleMobileMenu()" class="w-full inline-flex justify-center items-center px-5 py-3 rounded-xl text-sm font-bold text-white bg-zm-blue shadow-md">
+                    <i class="fa-solid fa-paper-plane mr-2"></i> Request IT Service Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= 1. HOME / HERO SECTION ================= -->
+    <section id="home" class="relative hero-bg text-white overflow-hidden">
+        <div class="absolute inset-0 circuit-pattern pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+                
+                <!-- Left Column: Headline & Value Proposition -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-500/15 border border-blue-400/30 text-zm-cyan text-xs font-semibold tracking-wide uppercase">
+                        <span class="w-2 h-2 rounded-full bg-zm-cyan led-blink"></span>
+                        <span>Complete Enterprise &amp; Commercial IT Partner</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-black tracking-tight leading-[1.12]">
+                        Enterprise Networking, <span class="text-transparent bg-clip-text bg-gradient-to-r from-zm-cyan via-sky-300 to-emerald-300">Security &amp; IT Infrastructure</span> Solutions
+                    </h1>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+                        From structured LAN/WAN cabling, <strong class="text-white font-semibold">MikroTik routing &amp; firewall security</strong>, and seamless <strong class="text-white font-semibold">UniFi WiFi</strong> to <strong class="text-white font-semibold">Windows/Linux servers, CCTV surveillance, and ZKTeco biometric systems</strong>—ZM IT Solutions keeps your business connected, protected, and running at peak efficiency.
+                    </p>
+
+                    <!-- Quick Service Pills -->
+                    <div class="flex flex-wrap gap-2 pt-1">
+                        <button onclick="selectServiceAndScroll('Network Installation')" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-white/10 hover:bg-zm-blue/80 border border-white/15 transition">
+                            <i class="fa-solid fa-network-wired text-zm-cyan mr-1.5"></i>LAN / WAN Cabling
+                        </button>
+                        <button onclick="selectServiceAndScroll('MikroTik Configuration')" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-white/10 hover:bg-zm-blue/80 border border-white/15 transition">
+                            <i class="fa-solid fa-route text-zm-cyan mr-1.5"></i>MikroTik Routing &amp; VPN
+                        </button>
+                        <button onclick="selectServiceAndScroll('UniFi WiFi Solutions')" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-white/10 hover:bg-zm-blue/80 border border-white/15 transition">
+                            <i class="fa-solid fa-wifi text-zm-cyan mr-1.5"></i>UniFi Enterprise WiFi
+                        </button>
+                        <button onclick="selectServiceAndScroll('ZKTeco Biometric Attendance Machine')" class="text-xs font-medium px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-600/80 border border-emerald-400/30 text-emerald-200 transition">
+                            <i class="fa-solid fa-fingerprint text-emerald-400 mr-1.5"></i>ZKTeco Biometrics
+                        </button>
+                    </div>
+
+                    <!-- Main CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                        <a href="#contact" class="inline-flex justify-center items-center px-7 py-4 rounded-xl text-base font-bold text-white bg-gradient-to-r from-zm-blue to-zm-lightBlue hover:from-blue-600 hover:to-blue-500 shadow-glow transition transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-calendar-check mr-2.5"></i>
+                            Request a Service / Quote
+                        </a>
+                        <a href="#services" class="inline-flex justify-center items-center px-7 py-4 rounded-xl text-base font-bold text-slate-100 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm transition">
+                            <i class="fa-solid fa-layer-group mr-2.5 text-zm-cyan"></i>
+                            Explore All Services
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Flyer-Inspired 4-Panel Hardware Showcase Showcase -->
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-2xl bg-slate-900/90 border border-slate-700/80 p-4 shadow-2xl">
+                        <!-- Top Window Header -->
+                        <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                <span class="text-xs font-mono text-slate-400 ml-2">ZM-INFRASTRUCTURE-STACK</span>
+                            </div>
+                            <span class="px-2.5 py-0.5 text-[11px] font-mono rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                STATUS: ONLINE
+                            </span>
+                        </div>
+
+                        <!-- 2x2 Hardware Grid Matching the Flyer's Top Right Visuals -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <!-- Card 1: MikroTik Router -->
+                            <div onclick="selectServiceAndScroll('MikroTik Configuration')" class="cursor-pointer group relative rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 p-4 border border-slate-700/80 hover:border-zm-cyan transition overflow-hidden">
+                                <div class="flex justify-between items-start mb-3">
+                                    <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/20 text-sky-300">RouterBOARD</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-zm-cyan transition"></i>
+                                </div>
+                                <!-- Stylized MikroTik Hardware Graphic -->
+                                <div class="my-2 bg-slate-950 rounded-lg p-3 border border-slate-800 flex flex-col justify-between">
+                                    <div class="flex items-center justify-between">
+                                        <span class="font-black italic tracking-tight text-sm text-white">MikroTik</span>
+                                        <div class="flex space-x-1">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 led-blink"></span>
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                            <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-5 gap-1 mt-3">
+                                        <div class="h-3 bg-slate-800 rounded-sm border border-amber-500/40"></div>
+                                        <div class="h-3 bg-slate-800 rounded-sm border border-emerald-500/40"></div>
+                                        <div class="h-3 bg-slate-800 rounded-sm border border-emerald-500/40"></div>
+                                        <div class="h-3 bg-slate-800 rounded-sm border border-slate-700"></div>
+                                        <div class="h-3 bg-slate-800 rounded-sm border border-sky-500/40"></div>
+                                    </div>
+                                </div>
+                                <p class="text-xs font-bold text-white mt-2">MikroTik Routing</p>
+                                <p class="text-[11px] text-slate-400">Load Balancing, VPN &amp; Firewall</p>
+                            </div>
+
+                            <!-- Card 2: UniFi Access Point -->
+                            <div onclick="selectServiceAndScroll('UniFi WiFi Solutions')" class="cursor-pointer group relative rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 p-4 border border-slate-700/80 hover:border-zm-cyan transition overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-sky-500/20 text-sky-300">UniFi AP</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-zm-cyan transition"></i>
+                                </div>
+                                <!-- Stylized UniFi Circular AP Disc -->
+                                <div class="my-1 flex justify-center">
+                                    <div class="w-20 h-20 rounded-full bg-gradient-to-b from-slate-100 to-slate-300 flex items-center justify-center shadow-inner relative">
+                                        <div class="w-11 h-11 rounded-full border-2 border-sky-500 flex items-center justify-center shadow-[0_0_12px_#0ea5e9]">
+                                            <span class="font-black text-xs text-slate-800">U</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-xs font-bold text-white mt-1.5">UniFi WiFi Solutions</p>
+                                <p class="text-[11px] text-slate-400">Seamless Roaming &amp; Controller</p>
+                            </div>
+
+                            <!-- Card 3: CCTV Surveillance -->
+                            <div onclick="selectServiceAndScroll('CCTV Installation')" class="cursor-pointer group relative rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 p-4 border border-slate-700/80 hover:border-zm-cyan transition overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300">IP CCTV</span>
+                                    <span class="flex items-center text-[10px] text-rose-400 font-mono"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 mr-1 led-blink"></span>REC</span>
+                                </div>
+                                <div class="my-2 bg-slate-950 rounded-lg p-3 border border-slate-800 flex items-center justify-center">
+                                    <i class="fa-solid fa-video text-3xl text-sky-400 group-hover:scale-110 transition"></i>
+                                </div>
+                                <p class="text-xs font-bold text-white mt-2">CCTV Surveillance</p>
+                                <p class="text-[11px] text-slate-400">HD NVR &amp; Mobile Live Viewing</p>
+                            </div>
+
+                            <!-- Card 4: Server Rack & Cabling -->
+                            <div onclick="selectServiceAndScroll('Windows & Linux Server Setup')" class="cursor-pointer group relative rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 p-4 border border-slate-700/80 hover:border-zm-cyan transition overflow-hidden">
+                                <div class="flex justify-between items-start mb-2">
+                                    <span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Server Rack</span>
+                                    <i class="fa-solid fa-server text-xs text-slate-400"></i>
+                                </div>
+                                <div class="my-2 space-y-1.5 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                                    <div class="h-3 bg-slate-800 rounded flex items-center px-2 justify-between">
+                                        <span class="w-8 h-1 bg-sky-400 rounded"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                    </div>
+                                    <div class="h-3 bg-slate-800 rounded flex items-center px-2 justify-between">
+                                        <span class="w-10 h-1 bg-sky-400 rounded"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                    </div>
+                                    <div class="h-3 bg-slate-800 rounded flex items-center px-2 justify-between">
+                                        <span class="w-6 h-1 bg-emerald-400 rounded"></span>
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                    </div>
+                                </div>
+                                <p class="text-xs font-bold text-white mt-2">Servers &amp; Structured LAN</p>
+                                <p class="text-[11px] text-slate-400">Windows, Linux, AD &amp; Backup</p>
+                            </div>
+                        </div>
+
+                        <!-- Flyer Ribbon Inside Hero Card: Reliable | Secure | Efficient -->
+                        <div class="mt-4 rounded-xl bg-gradient-to-r from-zm-navy via-zm-dark to-zm-navy border border-sky-500/30 py-3 px-4">
+                            <div class="grid grid-cols-3 divide-x divide-slate-700 text-center">
+                                <div class="flex flex-col sm:flex-row items-center justify-center gap-1.5 px-2">
+                                    <i class="fa-solid fa-shield-halved text-zm-cyan text-base"></i>
+                                    <span class="text-xs sm:text-sm font-bold tracking-wide text-white">Reliable</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row items-center justify-center gap-1.5 px-2">
+                                    <i class="fa-solid fa-lock text-zm-cyan text-base"></i>
+                                    <span class="text-xs sm:text-sm font-bold tracking-wide text-white">Secure</span>
+                                </div>
+                                <div class="flex flex-col sm:flex-row items-center justify-center gap-1.5 px-2">
+                                    <i class="fa-solid fa-bolt text-zm-cyan text-base"></i>
+                                    <span class="text-xs sm:text-sm font-bold tracking-wide text-white">Efficient</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Flyer-Inspired Core Pillars Bar -->
+        <div class="bg-zm-dark/90 border-t border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Pillar 1: Reliable -->
+                    <div class="flex items-center space-x-4 bg-white/5 rounded-xl p-4 border border-white/10">
+                        <div class="w-12 h-12 rounded-xl bg-zm-blue/30 border border-zm-cyan/40 flex items-center justify-center text-zm-cyan shrink-0">
+                            <i class="fa-solid fa-shield-check fa-shield-halved text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Reliable Infrastructure</h3>
+                            <p class="text-xs text-slate-300 mt-0.5">Enterprise-grade structured cabling, failover routing, and 99.9% network uptime design.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 2: Secure -->
+                    <div class="flex items-center space-x-4 bg-white/5 rounded-xl p-4 border border-white/10">
+                        <div class="w-12 h-12 rounded-xl bg-zm-blue/30 border border-zm-cyan/40 flex items-center justify-center text-zm-cyan shrink-0">
+                            <i class="fa-solid fa-user-lock text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Secure Network &amp; Access</h3>
+                            <p class="text-xs text-slate-300 mt-0.5">Hardened firewalls, encrypted VPN tunnels, CCTV monitoring, and biometric access control.</p>
+                        </div>
+                    </div>
+
+                    <!-- Pillar 3: Efficient -->
+                    <div class="flex items-center space-x-4 bg-white/5 rounded-xl p-4 border border-white/10">
+                        <div class="w-12 h-12 rounded-xl bg-zm-blue/30 border border-zm-cyan/40 flex items-center justify-center text-zm-cyan shrink-0">
+                            <i class="fa-solid fa-bolt-lightning text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Efficient Support &amp; AMC</h3>
+                            <p class="text-xs text-slate-300 mt-0.5">Fast remote troubleshooting and proactive Annual Maintenance Contracts for zero disruption.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 2. OUR SERVICES SECTION ================= -->
+    <section id="services" class="py-16 lg:py-24 bg-slate-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header Inspired by Flyer "OUR SERVICES" Blue Ribbon -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <div class="inline-block bg-gradient-to-r from-zm-blue to-blue-700 text-white font-extrabold text-sm sm:text-base tracking-wider uppercase px-6 py-2.5 rounded-r-lg flyer-ribbon shadow-md mb-3">
+                        OUR SERVICES
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-black text-zm-navy tracking-tight">
+                        Complete IT Infrastructure &amp; Support Services
+                    </h2>
+                </div>
+                <p class="text-slate-600 text-sm sm:text-base max-w-md">
+                    Click <span class="font-semibold text-zm-blue">"Select This Service"</span> on any card below to automatically load it into our booking form for an instant quote or consultation.
+                </p>
+            </div>
+
+            <!-- 8 Services Grid (Populated cleanly & matching the Flyer 100%) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <!-- Service 1: Network Installation -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-network-wired text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">01 / INFRA</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            Network Installation
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            LAN / WAN &nbsp;|&nbsp; Structured Cabling
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            End-to-end Cat6/Cat6A &amp; fiber optic cabling, patch panel termination, network rack dressing, and gigabit switch deployment for offices and industrial facilities.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('Network Installation')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 2: MikroTik Configuration -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-router fa-server text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">02 / ROUTING</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            MikroTik Configuration
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            Routing &nbsp;|&nbsp; Firewall &nbsp;|&nbsp; VPN
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            Multi-WAN ISP load balancing &amp; auto-failover, bandwidth management (QoS queues), Hotspot captive portals, IPsec/WireGuard/L2TP VPNs, and RouterOS firewall rules.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('MikroTik Configuration')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 3: UniFi WiFi Solutions -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-wifi text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">03 / WIRELESS</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            UniFi WiFi Solutions
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            Access Points &nbsp;|&nbsp; Network Management
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            Dead-zone-free enterprise Wi-Fi architecture with Ubiquiti UniFi Access Points, centralized UniFi Controller setup, guest VLAN isolation, and seamless roaming.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('UniFi WiFi Solutions')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 4: CCTV Installation -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-video text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">04 / SECURITY</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            CCTV Installation
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            Surveillance &nbsp;|&nbsp; Remote Viewing
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            High-definition IP &amp; PoE camera installation, NVR/DVR storage configuration, night-vision perimeter monitoring, and secure mobile/PC remote live viewing anywhere.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('CCTV Installation')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 5: Windows & Linux Server Setup -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-database text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">05 / SERVERS</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            Windows &amp; Linux Server Setup
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            Domain &nbsp;|&nbsp; File Server &nbsp;|&nbsp; Backup
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            Active Directory Domain Services (AD DS), Group Policy, centralized SMB/NFS file sharing with role permissions, virtualization, and automated local/cloud disaster backups.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('Windows & Linux Server Setup')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 6: Firewall & Network Security -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-shield-halved text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">06 / CYBERSEC</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            Firewall &amp; Network Security
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            Protection &nbsp;|&nbsp; Monitoring &nbsp;|&nbsp; Threat Prevention
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            Next-gen firewall policies, VLAN segmentation, intrusion prevention, port security, real-time traffic monitoring, and ransomware containment for business networks.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('Firewall & Network Security')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 7: Remote IT Support -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-headset text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">07 / HELPDESK</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            Remote IT Support
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            Quick Resolution &nbsp;|&nbsp; Ongoing Support
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            Instant remote diagnostics and troubleshooting for router configurations, server errors, email/domain issues, workstation setup, and urgent network outages.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('Remote IT Support')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service 8: Annual Maintenance Contracts (AMC) -->
+                <div class="bg-white rounded-2xl p-6 shadow-card border border-slate-200/80 hover:border-zm-blue hover:-translate-y-1 transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="w-14 h-14 rounded-full bg-zm-blue text-white flex items-center justify-center shadow-md group-hover:scale-110 transition">
+                                <i class="fa-solid fa-screwdriver-wrench text-2xl"></i>
+                            </div>
+                            <span class="text-xs font-mono font-bold text-slate-400">08 / AMC</span>
+                        </div>
+                        <h3 class="text-xl font-extrabold text-zm-navy group-hover:text-zm-blue transition">
+                            Annual Maintenance Contracts (AMC)
+                        </h3>
+                        <p class="text-xs font-bold text-zm-blue mt-1 tracking-wide">
+                            Preventive &nbsp;|&nbsp; On-Site &nbsp;|&nbsp; Remote
+                        </p>
+                        <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                            Scheduled preventive health checks, priority emergency on-site visits, unlimited remote support, backup verification, and complete peace of mind for your organization.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-100">
+                        <button onclick="selectServiceAndScroll('Annual Maintenance Contracts (AMC)')" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-blue-50 text-zm-blue group-hover:bg-zm-blue group-hover:text-white transition flex items-center justify-center">
+                            <span>Select This Service</span>
+                            <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FEATURED SPOTLIGHT: ZKTeco BIOMETRIC ATTENDANCE MACHINE ================= -->
+    <section id="zkteco-spotlight" class="py-16 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="rounded-3xl bg-gradient-to-br from-slate-100 via-white to-emerald-50/50 border-2 border-slate-200/90 shadow-xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+                
+                <!-- Decorative Top Corner Tag -->
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-6">
+                    <i class="fa-solid fa-fingerprint text-zm-zkGreen"></i>
+                    <span>Featured Hardware &amp; Software Integration</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    
+                    <!-- Left Side: Exact ZKTeco Flyer Details -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <!-- ZKTeco Stylized Brand Header matching flyer -->
+                        <div class="flex items-baseline space-x-1 select-none">
+                            <span class="text-4xl sm:text-5xl font-black italic tracking-tight text-zm-zkDark">ZKT</span>
+                            <span class="text-3xl sm:text-4xl font-black italic tracking-tight text-zm-zkGreen">ECO</span>
+                        </div>
+
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                            Biometric Attendance Machine
+                        </h2>
+
+                        <p class="text-sm sm:text-base font-bold text-slate-700 bg-slate-200/70 inline-block px-4 py-2 rounded-xl">
+                            Smart Attendance &nbsp;|&nbsp; Access Control &nbsp;|&nbsp; Employee Management
+                        </p>
+
+                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            Automate workforce time-tracking and secure door access with genuine ZKTeco biometric terminals installed, networked, and configured with attendance reporting software by <strong>ZM IT Solutions</strong>.
+                        </p>
+
+                        <!-- Flyer Green Checkmark Features -->
+                        <ul class="space-y-3 pt-2">
+                            <li class="flex items-center space-x-3">
+                                <span class="w-6 h-6 rounded-full bg-zm-zkGreen text-white flex items-center justify-center text-xs shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <span class="text-slate-800 font-semibold text-sm sm:text-base">Fingerprint / Card / Password Authentication</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <span class="w-6 h-6 rounded-full bg-zm-zkGreen text-white flex items-center justify-center text-xs shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <span class="text-slate-800 font-semibold text-sm sm:text-base">Easy to Use &amp; Reliable Payroll / Shift Reports</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <span class="w-6 h-6 rounded-full bg-zm-zkGreen text-white flex items-center justify-center text-xs shrink-0 shadow-sm">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <span class="text-slate-800 font-semibold text-sm sm:text-base">Suitable for Offices, Factories &amp; Businesses</span>
+                            </li>
+                        </ul>
+
+                        <!-- Action Buttons -->
+                        <div class="flex flex-wrap items-center gap-4 pt-4">
+                            <button onclick="selectServiceAndScroll('ZKTeco Biometric Attendance Machine')" class="px-6 py-3.5 rounded-xl bg-zm-zkGreen hover:bg-emerald-600 text-white font-bold text-sm shadow-lg hover:shadow-zk-glow transition flex items-center">
+                                <i class="fa-solid fa-file-signature mr-2"></i>
+                                Request ZKTeco Quote &amp; Installation
+                            </button>
+                            <button onclick="simulateBiometricScan()" class="px-5 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-semibold text-sm transition flex items-center">
+                                <i class="fa-solid fa-fingerprint text-emerald-400 mr-2"></i>
+                                Test Interactive Terminal Demo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Interactive Realistic ZKTeco Terminal Visual (10:08 Welcome) -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="w-full max-w-md bg-gradient-to-b from-slate-800 via-slate-900 to-black rounded-2xl p-6 shadow-2xl border-4 border-slate-700 text-white relative">
+                            <!-- Top Speaker Grille & Indicator LEDs -->
+                            <div class="flex justify-between items-center mb-4 px-2">
+                                <div class="flex space-x-1.5">
+                                    <span id="zkLedGreen" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#4ade80]"></span>
+                                    <span class="w-2.5 h-2.5 rounded-full bg-slate-700"></span>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <span class="w-8 h-1 rounded-full bg-slate-700"></span>
+                                    <span class="w-8 h-1 rounded-full bg-slate-700"></span>
+                                </div>
+                            </div>
+
+                            <!-- Terminal Body Split: Left (Screen + Keypad) | Right (Optical Fingerprint Sensor) -->
+                            <div class="grid grid-cols-12 gap-4 items-center">
+                                
+                                <!-- Left 7 Cols: LCD Screen + Keypad -->
+                                <div class="col-span-7 space-y-4">
+                                    <!-- LCD Display Screen showing 10:08 Welcome like the flyer -->
+                                    <div id="zkScreen" class="rounded-lg bg-gradient-to-b from-sky-700 via-blue-800 to-blue-950 p-3 border-2 border-slate-700 shadow-inner text-center relative overflow-hidden">
+                                        <div class="flex justify-between items-center text-[9px] text-sky-200 font-mono mb-1">
+                                            <span>LAN: OK</span>
+                                            <span><i class="fa-solid fa-wifi"></i> ZKT</span>
+                                        </div>
+                                        <div id="zkTimeDisplay" class="text-2xl sm:text-3xl font-mono font-bold tracking-wider text-white">
+                                            10:08
+                                        </div>
+                                        <div id="zkStatusText" class="text-xs font-semibold text-sky-200 mt-0.5">
+                                            Welcome
+                                        </div>
+                                        <div class="mt-2 pt-1 border-t border-sky-600/40 flex justify-between text-[9px] text-sky-300 font-mono">
+                                            <span>F1:Check-In</span>
+                                            <span>F2:Out</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tactile Keypad Grid -->
+                                    <div class="grid grid-cols-4 gap-1.5 font-mono text-[10px] font-bold">
+                                        <button onclick="simulateBiometricScan('1')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">1</button>
+                                        <button onclick="simulateBiometricScan('2')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">2</button>
+                                        <button onclick="simulateBiometricScan('3')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">3</button>
+                                        <button onclick="simulateBiometricScan('ESC')" class="py-1.5 rounded bg-slate-700 hover:bg-slate-600 border border-slate-500 text-amber-300 text-[9px]">ESC</button>
+
+                                        <button onclick="simulateBiometricScan('4')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">4</button>
+                                        <button onclick="simulateBiometricScan('5')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">5</button>
+                                        <button onclick="simulateBiometricScan('6')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">6</button>
+                                        <button onclick="simulateBiometricScan('MENU')" class="py-1.5 rounded bg-slate-700 hover:bg-slate-600 border border-slate-500 text-sky-300 text-[9px]">M/OK</button>
+
+                                        <button onclick="simulateBiometricScan('7')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">7</button>
+                                        <button onclick="simulateBiometricScan('8')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">8</button>
+                                        <button onclick="simulateBiometricScan('9')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">9</button>
+                                        <button onclick="simulateBiometricScan('UP')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200"><i class="fa-solid fa-caret-up"></i></button>
+
+                                        <button onclick="simulateBiometricScan('BELL')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-emerald-400"><i class="fa-solid fa-bell"></i></button>
+                                        <button onclick="simulateBiometricScan('0')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200">0</button>
+                                        <button onclick="simulateBiometricScan('CARD')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200"><i class="fa-solid fa-id-card"></i></button>
+                                        <button onclick="simulateBiometricScan('DOWN')" class="py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-200"><i class="fa-solid fa-caret-down"></i></button>
+                                    </div>
+                                </div>
+
+                                <!-- Right 5 Cols: Glowing Green Fingerprint Sensor Window + Brand Logo -->
+                                <div class="col-span-5 flex flex-col items-center justify-between space-y-4">
+                                    <!-- Recessed Optical Sensor Box -->
+                                    <div onclick="simulateBiometricScan()" title="Click to Scan Fingerprint" class="cursor-pointer w-28 h-36 rounded-xl bg-slate-950 border-2 border-slate-700 p-2.5 flex flex-col items-center justify-center relative shadow-inner group">
+                                        <span class="text-[9px] text-slate-400 uppercase tracking-widest mb-1">Touch Sensor</span>
+                                        <div class="w-20 h-24 rounded-lg bg-gradient-to-b from-emerald-950 via-emerald-700/60 to-emerald-500/80 border border-emerald-400/60 flex items-center justify-center relative overflow-hidden shadow-[0_0_20px_rgba(34,197,94,0.5)] group-hover:shadow-[0_0_30px_rgba(34,197,94,0.9)] transition">
+                                            <div class="scanner-laser"></div>
+                                            <i class="fa-solid fa-fingerprint text-4xl text-emerald-200/90 group-hover:scale-110 transition"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- ZKTeco Logo on Terminal -->
+                                    <div class="text-center">
+                                        <span class="text-sm font-black italic tracking-tight text-slate-200">ZKT</span><span class="text-xs font-black italic text-zm-zkGreen">ECO</span>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">Click sensor to test</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 3. ABOUT ZM IT SOLUTIONS SECTION ================= -->
+    <section id="about" class="py-16 lg:py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 circuit-pattern pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Story & Mission -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-zm-blue/30 border border-zm-cyan/30 text-zm-cyan text-xs font-bold uppercase tracking-wider">
+                        <span>About ZM IT Solutions</span>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight leading-tight">
+                        Your Trusted Partner for End-to-End Business IT &amp; Network Engineering
+                    </h2>
+
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        At <strong class="text-white">ZM IT Solutions</strong>, we specialize in designing, deploying, and maintaining high-performance IT environments for corporate offices, industrial factories, commercial plazas, and growing enterprises.
+                    </p>
+
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Whether you are setting up a new office from scratch with structured LAN cabling and UniFi Wi-Fi, securing branch connectivity with MikroTik routers and firewalls, deploying Windows &amp; Linux servers, or automating staff attendance with ZKTeco biometric machines—our technical team delivers clean, documented, and reliable implementations.
+                    </p>
+
+                    <!-- Key Metrics Grid -->
+                    <div class="grid grid-cols-3 gap-4 pt-2">
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 text-center">
+                            <div class="text-2xl sm:text-3xl font-black text-zm-cyan">99.9%</div>
+                            <div class="text-xs text-slate-300 mt-1">Network Stability</div>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 text-center">
+                            <div class="text-2xl sm:text-3xl font-black text-emerald-400">8+</div>
+                            <div class="text-xs text-slate-300 mt-1">Core IT Specialties</div>
+                        </div>
+                        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 text-center">
+                            <div class="text-2xl sm:text-3xl font-black text-sky-400">24/7</div>
+                            <div class="text-xs text-slate-300 mt-1">Remote &amp; AMC Care</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: 4-Step Implementation Workflow -->
+                <div class="lg:col-span-6 space-y-4">
+                    <div class="bg-slate-800/70 border border-slate-700/80 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                            <i class="fa-solid fa-diagram-project text-zm-cyan mr-2.5"></i>
+                            How ZM IT Solutions Delivers Projects
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-lg bg-zm-blue text-white font-mono font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">1</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Site Survey &amp; Requirement Audit</h4>
+                                    <p class="text-xs text-slate-300 mt-1">We evaluate your floor plan, user count, bandwidth requirements, security zones, and server workloads.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-lg bg-zm-blue text-white font-mono font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">2</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Structured Cabling &amp; Hardware Setup</h4>
+                                    <p class="text-xs text-slate-300 mt-1">Clean rack mounting, labeled LAN/WAN cabling, CCTV camera positioning, and UniFi AP placement.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-lg bg-zm-blue text-white font-mono font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">3</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Configuration, Hardening &amp; Testing</h4>
+                                    <p class="text-xs text-slate-300 mt-1">MikroTik routing/VPN policies, firewall protection, Active Directory domain setup, and ZKTeco enrollment.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-lg bg-zm-zkGreen text-white font-mono font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">4</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Remote IT Support &amp; Preventive AMC</h4>
+                                    <p class="text-xs text-slate-300 mt-1">Continuous monitoring, rapid remote troubleshooting, and scheduled on-site maintenance visits.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ecosystem Tags -->
+                    <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-5">
+                        <p class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Platforms &amp; Technologies We Configure:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200">MikroTik RouterOS</span>
+                            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200">Ubiquiti UniFi</span>
+                            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-emerald-600/50 text-xs font-semibold text-emerald-300">ZKTeco Biometrics</span>
+                            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200">Windows Server / AD</span>
+                            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200">Linux (Ubuntu / RedHat)</span>
+                            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200">IP CCTV &amp; NVR</span>
+                            <span class="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-200">Firewall &amp; VPNs</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 4. CONTACT US & WORKING SERVICE REQUEST FORM ================= -->
+    <section id="contact" class="py-16 lg:py-24 bg-slate-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Section Heading -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="inline-flex items-center px-3.5 py-1 rounded-full bg-blue-100 text-zm-blue text-xs font-bold uppercase tracking-wider">
+                    Book a Service or Request a Quote
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-black text-zm-navy mt-3">
+                    Contact ZM IT Solutions
+                </h2>
+                <p class="text-slate-600 text-sm sm:text-base mt-2">
+                    Select the service you need below and submit the form. You will receive an instant <strong class="text-slate-800">Service Request Reference Receipt</strong>, and your inquiry will be logged immediately.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+                <!-- Left 7 Columns: Interactive Working Service Request Form -->
+                <div class="lg:col-span-7">
+                    <div id="serviceFormContainer" class="bg-white rounded-3xl shadow-xl border border-slate-200/90 p-6 sm:p-8 lg:p-10 transition-all">
+                        
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-5 mb-6 border-b border-slate-100">
+                            <div>
+                                <h3 class="text-xl font-extrabold text-zm-navy">Service Booking &amp; Inquiry Form</h3>
+                                <p class="text-xs text-slate-500 mt-0.5">All fields marked with <span class="text-rose-500 font-bold">*</span> are required</p>
+                            </div>
+                            <button type="button" onclick="fillDemoForm()" class="text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-zm-blue border border-slate-200 transition">
+                                <i class="fa-solid fa-wand-magic-sparkles mr-1 text-zm-blue"></i> Auto-Fill Demo Data
+                            </button>
+                        </div>
+
+                        <form id="zmServiceForm" onsubmit="handleServiceFormSubmit(event)" class="space-y-5">
+                            <!-- Row 1: Name & Phone -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="clientName" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                                        Full Name <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <i class="fa-solid fa-user text-slate-400 absolute left-3.5 top-3.5 text-sm"></i>
+                                        <input type="text" id="clientName" required placeholder="e.g., Muhammad Zubair"
+                                            class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 focus:bg-white focus:border-zm-blue focus:ring-2 focus:ring-zm-blue/20 outline-none transition">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="clientPhone" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                                        Phone / WhatsApp Number <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <i class="fa-brands fa-whatsapp text-emerald-600 absolute left-3.5 top-3.5 text-base"></i>
+                                        <input type="tel" id="clientPhone" required placeholder="e.g., +92 300 1234567"
+                                            class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 focus:bg-white focus:border-zm-blue focus:ring-2 focus:ring-zm-blue/20 outline-none transition">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 2: Email & Organization Type -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="clientEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                                        Email Address <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <i class="fa-solid fa-envelope text-slate-400 absolute left-3.5 top-3.5 text-sm"></i>
+                                        <input type="email" id="clientEmail" required placeholder="name@company.com"
+                                            class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 focus:bg-white focus:border-zm-blue focus:ring-2 focus:ring-zm-blue/20 outline-none transition">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="orgType" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                                        Organization / Site Type <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <i class="fa-solid fa-building text-slate-400 absolute left-3.5 top-3.5 text-sm"></i>
+                                        <select id="orgType" required
+                                            class="w-full pl-10 pr-8 py-3 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 focus:bg-white focus:border-zm-blue focus:ring-2 focus:ring-zm-blue/20 outline-none transition">
+                                            <option value="Corporate Office">Corporate Office</option>
+                                            <option value="Factory / Industrial Plant">Factory / Industrial Plant</option>
+                                            <option value="Commercial Business / Retail">Commercial Business / Retail</option>
+                                            <option value="School / University / Campus">School / University / Campus</option>
+                                            <option value="Hospital / Clinic">Hospital / Clinic</option>
+                                            <option value="Home Office / Other">Home Office / Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 3: Primary Service Selection Dropdown -->
+                            <div>
+                                <label for="primaryService" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                                    Primary Service Needed <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <i class="fa-solid fa-gears text-zm-blue absolute left-3.5 top-3.5 text-sm"></i>
+                                    <select id="primaryService" required onchange="syncCheckboxWithPrimaryService()"
+                                        class="w-full pl-10 pr-8 py-3.5 rounded-xl bg-blue-50/50 border-2 border-zm-blue/40 text-sm font-semibold text-zm-navy focus:bg-white focus:border-zm-blue focus:ring-2 focus:ring-zm-blue/20 outline-none transition">
+                                        <option value="Network Installation">1. Network Installation (LAN / WAN | Structured Cabling)</option>
+                                        <option value="MikroTik Configuration">2. MikroTik Configuration (Routing | Firewall | VPN)</option>
+                                        <option value="UniFi WiFi Solutions">3. UniFi WiFi Solutions (Access Points | Network Management)</option>
+                                        <option value="CCTV Installation">4. CCTV Installation (Surveillance | Remote Viewing)</option>
+                                        <option value="Windows & Linux Server Setup">5. Windows &amp; Linux Server Setup (Domain | File Server | Backup)</option>
+                                        <option value="Firewall & Network Security">6. Firewall &amp; Network Security (Protection | Monitoring | Threat Prevention)</option>
+                                        <option value="Remote IT Support">7. Remote IT Support (Quick Resolution | Ongoing Support)</option>
+                                        <option value="Annual Maintenance Contracts (AMC)">8. Annual Maintenance Contracts - AMC (Preventive | On-Site | Remote)</option>
+                                        <option value="ZKTeco Biometric Attendance Machine">9. ZKTeco Biometric Attendance Machine (Fingerprint / Card / Access Control)</option>
+                                        <option value="Complete Office IT Package">10. Complete Office IT Setup (Multi-Service Turnkey Package)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Row 4: Additional Bundled Services Checkboxes -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Bundle Additional Services (Optional - Select all that apply):
+                                </label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-200 text-xs">
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="Network Installation" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">Network Installation (LAN/WAN)</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="MikroTik Configuration" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">MikroTik Configuration</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="UniFi WiFi Solutions" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">UniFi WiFi Solutions</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="CCTV Installation" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">CCTV Installation</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="Windows & Linux Server Setup" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">Windows &amp; Linux Server Setup</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="Firewall & Network Security" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">Firewall &amp; Network Security</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="Remote IT Support" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">Remote IT Support</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer">
+                                        <input type="checkbox" name="extraService" value="Annual Maintenance Contracts (AMC)" class="w-4 h-4 rounded text-zm-blue focus:ring-zm-blue">
+                                        <span class="font-medium text-slate-700">Annual Maintenance (AMC)</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2.5 p-1.5 rounded-lg hover:bg-white cursor-pointer sm:col-span-2 bg-emerald-50/70 border border-emerald-200/70">
+                                        <input type="checkbox" name="extraService" value="ZKTeco Biometric Attendance Machine" class="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500">
+                                        <span class="font-bold text-emerald-800">ZKTeco Biometric Attendance Machine (Fingerprint / Card / Access Control)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Row 5: Preferred Support Mode -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Preferred Support / Service Delivery Mode <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="supportMode" value="On-Site Installation / Visit" checked class="peer sr-only">
+                                        <div class="p-3 rounded-xl border border-slate-300 bg-slate-50 peer-checked:border-zm-blue peer-checked:bg-blue-50 peer-checked:text-zm-blue text-center text-xs font-bold transition">
+                                            <i class="fa-solid fa-truck-fast mr-1.5"></i> On-Site Visit
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="supportMode" value="Instant Remote Support" class="peer sr-only">
+                                        <div class="p-3 rounded-xl border border-slate-300 bg-slate-50 peer-checked:border-zm-blue peer-checked:bg-blue-50 peer-checked:text-zm-blue text-center text-xs font-bold transition">
+                                            <i class="fa-solid fa-laptop-medical mr-1.5"></i> Remote Support
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="supportMode" value="Annual Maintenance Contract (AMC)" class="peer sr-only">
+                                        <div class="p-3 rounded-xl border border-slate-300 bg-slate-50 peer-checked:border-zm-blue peer-checked:bg-blue-50 peer-checked:text-zm-blue text-center text-xs font-bold transition">
+                                            <i class="fa-solid fa-file-shield mr-1.5"></i> AMC Contract
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Row 6: Project Details + Quick Fill Prompt Pills -->
+                            <div>
+                                <div class="flex flex-wrap justify-between items-center mb-1.5">
+                                    <label for="projectDetails" class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                                        Project Details / Requirement Description <span class="text-rose-500">*</span>
+                                    </label>
+                                    <span class="text-[11px] text-slate-400">Click a quick template below or type your own</span>
+                                </div>
+
+                                <!-- Quick Templates -->
+                                <div class="flex flex-wrap gap-1.5 mb-2">
+                                    <button type="button" onclick="setQuickNote('We need structured LAN cabling and UniFi WiFi Access Points configured for a 40-person office.')" class="text-[11px] bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-zm-blue px-2.5 py-1 rounded-lg border border-slate-200 transition">
+                                        + Office LAN &amp; UniFi WiFi
+                                    </button>
+                                    <button type="button" onclick="setQuickNote('Need MikroTik router configuration with Dual-WAN failover, bandwidth control, and VPN access.')" class="text-[11px] bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-zm-blue px-2.5 py-1 rounded-lg border border-slate-200 transition">
+                                        + MikroTik Dual-WAN &amp; VPN
+                                    </button>
+                                    <button type="button" onclick="setQuickNote('Please quote for ZKTeco Biometric Attendance Machine installation with software setup for our staff.')" class="text-[11px] bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-lg border border-emerald-200 transition">
+                                        + ZKTeco Attendance Quote
+                                    </button>
+                                    <button type="button" onclick="setQuickNote('Looking for Windows Server Active Directory setup, file sharing permissions, and automated daily backup.')" class="text-[11px] bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-zm-blue px-2.5 py-1 rounded-lg border border-slate-200 transition">
+                                        + Server &amp; Domain Setup
+                                    </button>
+                                </div>
+
+                                <textarea id="projectDetails" rows="3" required placeholder="Describe your network, server, CCTV, biometric, or IT support requirements..."
+                                    class="w-full p-3.5 rounded-xl bg-slate-50 border border-slate-300 text-sm text-slate-900 focus:bg-white focus:border-zm-blue focus:ring-2 focus:ring-zm-blue/20 outline-none transition"></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" id="submitFormBtn" class="w-full py-4 px-6 rounded-xl text-base font-extrabold text-white bg-gradient-to-r from-zm-blue to-zm-lightBlue hover:from-blue-700 hover:to-zm-blue shadow-lg hover:shadow-glow transition flex items-center justify-center">
+                                <i class="fa-solid fa-paper-plane mr-2.5"></i>
+                                <span>Submit Service Request</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right 5 Columns: Direct Contact Info + Live Submitted Requests Panel -->
+                <div class="lg:col-span-5 space-y-6">
+
+                    <!-- Direct Contact Card -->
+                    <div class="bg-zm-navy text-white rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+                        <div class="flex items-center space-x-3 mb-5">
+                            <div class="w-11 h-11 rounded-xl bg-zm-blue flex items-center justify-center text-white font-black text-lg">ZM</div>
+                            <div>
+                                <h3 class="text-lg font-extrabold">ZM IT Solutions Desk</h3>
+                                <p class="text-xs text-zm-cyan">Fast Turnaround &bull; Certified Engineers</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-sm">
+                            <div class="flex items-start space-x-3.5">
+                                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-zm-cyan shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-phone-volume"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Call or WhatsApp Direct</p>
+                                    <p class="font-bold text-white">+92 300 1234567</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3.5">
+                                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-zm-cyan shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Service &amp; AMC Inquiries</p>
+                                    <p class="font-bold text-white">support@zmitsolutions.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-3.5">
+                                <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400">Working Hours &amp; Remote Desk</p>
+                                    <p class="font-semibold text-white">Mon – Sat: 9:00 AM – 8:00 PM (24/7 Emergency AMC)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3 Core Badges -->
+                        <div class="mt-6 pt-5 border-t border-slate-800 grid grid-cols-3 gap-2 text-center text-xs font-bold">
+                            <div class="bg-white/5 py-2 rounded-lg text-sky-300"><i class="fa-solid fa-shield-halved mr-1"></i>Reliable</div>
+                            <div class="bg-white/5 py-2 rounded-lg text-sky-300"><i class="fa-solid fa-lock mr-1"></i>Secure</div>
+                            <div class="bg-white/5 py-2 rounded-lg text-sky-300"><i class="fa-solid fa-bolt mr-1"></i>Efficient</div>
+                        </div>
+                    </div>
+
+                    <!-- Live Submitted Service Requests Panel (So the user can test and verify submissions work!) -->
+                    <div id="inquiriesPanel" class="bg-white rounded-3xl shadow-xl border border-slate-200 p-6">
+                        <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-100">
+                            <div class="flex items-center space-x-2.5">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 led-blink"></span>
+                                <div>
+                                    <h3 class="text-base font-extrabold text-zm-navy">Submitted Service Inquiries</h3>
+                                    <p class="text-[11px] text-slate-500">Live testing log (saved in your browser)</p>
+                                </div>
+                            </div>
+                            <button onclick="clearAllInquiries()" class="text-xs text-rose-600 hover:underline font-semibold" title="Clear all test inquiries">
+                                Clear All
+                            </button>
+                        </div>
+
+                        <!-- Dynamic List of Submitted Requests -->
+                        <div id="inquiriesListContainer" class="space-y-3 max-h-96 overflow-y-auto pr-1">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 5. COMPREHENSIVE 4-COLUMN FOOTER ================= -->
+    <footer class="bg-zm-navy text-slate-300 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
+
+                <!-- Col 1 (4 Cols): Brand Summary & Flyer Pillars -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-zm-blue flex items-center justify-center text-white font-black text-lg">
+                            ZM
+                        </div>
+                        <span class="text-xl font-extrabold text-white">ZM <span class="text-zm-cyan">IT Solutions</span></span>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed">
+                        Professional IT infrastructure, network cabling, MikroTik routing, UniFi WiFi, Windows &amp; Linux servers, CCTV surveillance, ZKTeco biometric attendance systems, and dedicated Annual Maintenance Contracts (AMC).
+                    </p>
+                    <div class="flex items-center space-x-3 pt-1 text-xs font-bold text-white">
+                        <span class="flex items-center px-2.5 py-1 rounded bg-slate-800 border border-slate-700"><i class="fa-solid fa-shield-halved text-zm-cyan mr-1.5"></i>Reliable</span>
+                        <span class="flex items-center px-2.5 py-1 rounded bg-slate-800 border border-slate-700"><i class="fa-solid fa-lock text-zm-cyan mr-1.5"></i>Secure</span>
+                        <span class="flex items-center px-2.5 py-1 rounded bg-slate-800 border border-slate-700"><i class="fa-solid fa-bolt text-zm-cyan mr-1.5"></i>Efficient</span>
+                    </div>
+                </div>
+
+                <!-- Col 2 (2 Cols): Quick Navigation -->
+                <div class="lg:col-span-2 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#home" class="hover:text-zm-cyan transition">Home</a></li>
+                        <li><a href="#services" class="hover:text-zm-cyan transition">Our Services</a></li>
+                        <li><a href="#zkteco-spotlight" class="hover:text-emerald-400 transition">ZKTeco Biometrics</a></li>
+                        <li><a href="#about" class="hover:text-zm-cyan transition">About Us</a></li>
+                        <li><a href="#contact" class="hover:text-zm-cyan transition">Contact &amp; Quote</a></li>
+                        <li><button onclick="scrollToInquiriesPanel()" class="hover:text-zm-cyan transition text-left">Submitted Requests</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3 (3 Cols): Our Core Services (Clicking any selects it in the form!) -->
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Our IT Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><button onclick="selectServiceAndScroll('Network Installation')" class="hover:text-zm-cyan transition text-left">Network Installation (LAN/WAN)</button></li>
+                        <li><button onclick="selectServiceAndScroll('MikroTik Configuration')" class="hover:text-zm-cyan transition text-left">MikroTik Configuration &amp; VPN</button></li>
+                        <li><button onclick="selectServiceAndScroll('UniFi WiFi Solutions')" class="hover:text-zm-cyan transition text-left">UniFi WiFi Solutions</button></li>
+                        <li><button onclick="selectServiceAndScroll('CCTV Installation')" class="hover:text-zm-cyan transition text-left">CCTV Surveillance Installation</button></li>
+                        <li><button onclick="selectServiceAndScroll('Windows & Linux Server Setup')" class="hover:text-zm-cyan transition text-left">Windows &amp; Linux Server Setup</button></li>
+                        <li><button onclick="selectServiceAndScroll('Firewall & Network Security')" class="hover:text-zm-cyan transition text-left">Firewall &amp; Network Security</button></li>
+                        <li><button onclick="selectServiceAndScroll('Remote IT Support')" class="hover:text-zm-cyan transition text-left">Remote IT Support &amp; AMC</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4 (3 Cols): ZKTeco & Emergency Support CTA -->
+                <div class="lg:col-span-3 space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-white">Biometric &amp; AMC Desk</h4>
+                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-black italic text-white">ZKT<span class="text-zm-zkGreen">ECO</span></span>
+                            <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">Authorized Setup</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Need biometric attendance or door access control for your office or factory?</p>
+                        <button onclick="selectServiceAndScroll('ZKTeco Biometric Attendance Machine')" class="w-full py-2 rounded-lg bg-zm-zkGreen hover:bg-emerald-600 text-white font-bold text-xs transition">
+                            Book ZKTeco Setup
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-400">
+                        <i class="fa-solid fa-location-dot text-zm-cyan mr-1.5"></i> On-Site Visits &amp; Remote Support Nationwide
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="mt-12 pt-8 border-t border-slate-800/90 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                <p>&copy; 2026 <strong class="text-white">ZM IT Solutions</strong>. All rights reserved. Reliable &bull; Secure &bull; Efficient.</p>
+                <a href="#home" class="inline-flex items-center px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-zm-blue text-white font-semibold transition">
+                    <span>Back to Top</span>
+                    <i class="fa-solid fa-arrow-up ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= SERVICE CONFIRMATION & PRINTABLE RECEIPT MODAL ================= -->
+    <div id="confirmationModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/75 backdrop-blur-sm p-4 overflow-y-auto">
+        <div id="printableReceipt" class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative my-8">
+            
+            <!-- Modal Top Success Badge -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-5">
+                <div class="flex items-center space-x-3">
+                    <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-mono uppercase tracking-wider text-emerald-600 font-bold">Request Logged Successfully</span>
+                        <h3 class="text-xl font-black text-zm-navy">ZM IT Solutions Receipt</h3>
+                    </div>
+                </div>
+                <button onclick="closeConfirmationModal()" class="no-print w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Receipt Summary Content -->
+            <div class="space-y-4 text-sm">
+                <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-[11px] text-slate-500 uppercase font-bold">Ticket Reference ID</p>
+                        <p id="modalRefId" class="font-mono font-bold text-base text-zm-blue">#ZMIT-2026-0000</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[11px] text-slate-500 uppercase font-bold">Submitted On</p>
+                        <p id="modalTimestamp" class="font-mono text-xs text-slate-700">--</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 bg-white p-3.5 rounded-xl border border-slate-200">
+                    <div>
+                        <p class="text-[11px] text-slate-400 uppercase font-bold">Client Name</p>
+                        <p id="modalClientName" class="font-bold text-slate-800">--</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-slate-400 uppercase font-bold">Phone / WhatsApp</p>
+                        <p id="modalClientPhone" class="font-bold text-slate-800">--</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-slate-400 uppercase font-bold">Email</p>
+                        <p id="modalClientEmail" class="font-medium text-slate-700 truncate">--</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] text-slate-400 uppercase font-bold">Organization Type</p>
+                        <p id="modalOrgType" class="font-medium text-slate-700">--</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50/70 rounded-xl p-4 border border-blue-200/80 space-y-2">
+                    <div>
+                        <p class="text-[11px] text-zm-blue uppercase font-bold">Requested IT Service(s)</p>
+                        <p id="modalServicesList" class="font-extrabold text-zm-navy text-sm mt-0.5">--</p>
+                    </div>
+                    <div class="pt-1 border-t border-blue-200/60 flex justify-between text-xs">
+                        <span class="text-slate-600">Support Mode:</span>
+                        <span id="modalSupportMode" class="font-bold text-slate-900">--</span>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="text-[11px] text-slate-400 uppercase font-bold mb-1">Project Requirements</p>
+                    <p id="modalDetails" class="text-xs text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200 leading-relaxed">--</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons in Modal -->
+            <div class="no-print mt-6 pt-4 border-t border-slate-100 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <a id="modalWhatsAppBtn" href="#" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center transition">
+                    <i class="fa-brands fa-whatsapp text-sm mr-1.5"></i> Send on WhatsApp
+                </a>
+                <button onclick="window.print()" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs flex items-center justify-center transition">
+                    <i class="fa-solid fa-print mr-1.5 text-zm-blue"></i> Print Receipt
+                </button>
+                <button onclick="closeConfirmationModal()" class="py-2.5 px-3 rounded-xl bg-zm-blue hover:bg-blue-700 text-white font-bold text-xs flex items-center justify-center transition">
+                    Done
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= TOAST NOTIFICATION ================= -->
+    <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden items-center space-x-3 bg-zm-navy text-white px-4 py-3 rounded-2xl shadow-2xl border border-sky-500/40 text-xs font-semibold">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMessage">Service selected!</span>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Storage key for ZM IT Solutions inquiries
+        const STORAGE_KEY = 'zm_it_solutions_inquiries_v1';
+
+        // Default sample inquiry so the owner immediately sees how the inquiry panel works
+        const DEFAULT_INQUIRIES = [
+            {
+                id: 'ZMIT-2026-8491',
+                timestamp: 'Today, 09:45 AM',
+                name: ' Usman Tariq (Apex Textiles)',
+                phone: '+92 321 9876543',
+                email: 'it.head@apextextiles.pk',
+                orgType: 'Factory / Industrial Plant',
+                services: ['MikroTik Configuration', 'ZKTeco Biometric Attendance Machine', 'UniFi WiFi Solutions'],
+                supportMode: 'On-Site Installation / Visit',
+                details: 'Need 2 ZKTeco biometric attendance machines for factory gates and MikroTik bandwidth management with UniFi APs.',
+                status: 'In Progress'
+            }
+        ];
+
+        // Load inquiries from localStorage or initialize default
+        function getInquiries() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_INQUIRIES));
+                    return DEFAULT_INQUIRIES;
+                }
+                return JSON.parse(raw);
+            } catch (e) {
+                return DEFAULT_INQUIRIES;
+            }
+        }
+
+        function saveInquiries(list) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            } catch (e) {
+                console.error('Storage error:', e);
+            }
+            renderInquiriesList();
+        }
+
+        // Render the live Submitted Inquiries list and update navbar badge counts
+        function renderInquiriesList() {
+            const inquiries = getInquiries();
+            const countBadge = document.getElementById('navInquiryCount');
+            const mobileCountBadge = document.getElementById('mobileNavInquiryCount');
+            const container = document.getElementById('inquiriesListContainer');
+
+            if (countBadge) countBadge.textContent = inquiries.length;
+            if (mobileCountBadge) mobileCountBadge.textContent = inquiries.length;
+
+            if (!container) return;
+
+            if (inquiries.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 px-4 rounded-2xl bg-slate-50 border border-dashed border-slate-200">
+                        <i class="fa-solid fa-inbox text-2xl text-slate-400 mb-2"></i>
+                        <p class="text-xs font-bold text-slate-600">No service requests submitted yet.</p>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Fill and submit the form to test live booking!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = inquiries.map((item, idx) => {
+                const statusColor = item.status === 'Completed'
+                    ? 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                    : item.status === 'In Progress'
+                    ? 'bg-amber-100 text-amber-800 border-amber-200'
+                    : 'bg-blue-100 text-zm-blue border-blue-200';
+
+                return `
+                    <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-zm-blue/50 transition text-xs space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono font-bold text-zm-blue">#${item.id}</span>
+                            <div class="flex items-center space-x-1.5">
+                                <button onclick="cycleInquiryStatus(${idx})" title="Click to change status" class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${statusColor}">
+                                    ${item.status} <i class="fa-solid fa-rotate ml-0.5 text-[9px]"></i>
+                                </button>
+                                <button onclick="deleteInquiry(${idx})" title="Remove entry" class="text-slate-400 hover:text-rose-600 px-1">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="font-extrabold text-slate-800">${escapeHtml(item.name)} <span class="font-normal text-slate-500">(${escapeHtml(item.orgType)})</span></p>
+                            <p class="text-[11px] text-slate-500"><i class="fa-solid fa-phone mr-1"></i>${escapeHtml(item.phone)} &bull; ${escapeHtml(item.timestamp)}</p>
+                        </div>
+                        <div class="flex flex-wrap gap-1">
+                            ${item.services.map(s => `<span class="px-2 py-0.5 rounded bg-white border border-slate-200 font-semibold text-[10px] text-zm-navy">${escapeHtml(s)}</span>`).join('')}
+                        </div>
+                        <p class="text-[11px] text-slate-600 bg-white p-2 rounded-lg border border-slate-200/70">${escapeHtml(item.details)}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Escape HTML helper to prevent XSS
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Cycle status between New -> In Progress -> Completed
+        function cycleInquiryStatus(index) {
+            const list = getInquiries();
+            if (!list[index]) return;
+            const order = ['New Request', 'In Progress', 'Completed'];
+            const currentIdx = order.indexOf(list[index].status);
+            list[index].status = order[(currentIdx + 1) % order.length];
+            saveInquiries(list);
+            showToast(`Status updated to "${list[index].status}"`);
+        }
+
+        function deleteInquiry(index) {
+            const list = getInquiries();
+            list.splice(index, 1);
+            saveInquiries(list);
+            showToast('Inquiry removed');
+        }
+
+        function clearAllInquiries() {
+            saveInquiries([]);
+            showToast('All test inquiries cleared');
+        }
+
+        // Select a service from any card or button and scroll smoothly to the Contact Form
+        function selectServiceAndScroll(serviceName) {
+            const selectEl = document.getElementById('primaryService');
+            if (selectEl) {
+                selectEl.value = serviceName;
+                syncCheckboxWithPrimaryService();
+            }
+
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            const formCard = document.getElementById('serviceFormContainer');
+            if (formCard) {
+                formCard.classList.remove('form-pulse-highlight');
+                void formCard.offsetWidth; // trigger reflow
+                formCard.classList.add('form-pulse-highlight');
+            }
+
+            showToast(`Selected: ${serviceName}`);
+        }
+
+        // Keep checkboxes synced when primary service changes
+        function syncCheckboxWithPrimaryService() {
+            const primary = document.getElementById('primaryService').value;
+            const checkboxes = document.querySelectorAll('input[name="extraService"]');
+            checkboxes.forEach(cb => {
+                if (cb.value === primary) {
+                    cb.checked = true;
+                }
+            });
+        }
+
+        // Quick template filler for project details
+        function setQuickNote(text) {
+            const area = document.getElementById('projectDetails');
+            if (area) {
+                area.value = text;
+                area.focus();
+            }
+        }
+
+        // Auto-fill realistic demo data so user can test submitting with 1 click
+        function fillDemoForm() {
+            document.getElementById('clientName').value = 'Kamran Ahmed';
+            document.getElementById('clientPhone').value = '+92 300 5558899';
+            document.getElementById('clientEmail').value = 'kamran@metrologix.com';
+            document.getElementById('orgType').value = 'Corporate Office';
+            document.getElementById('primaryService').value = 'MikroTik Configuration';
+            syncCheckboxWithPrimaryService();
+            document.getElementById('projectDetails').value = 'We need MikroTik Dual-ISP load balancing, firewall security rules, UniFi WiFi APs, and 1 ZKTeco Biometric Attendance Machine for 35 employees.';
+            showToast('Demo client data filled! Click "Submit Service Request" to test.');
+        }
+
+        // Handle Service Request Form Submission
+        function handleServiceFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('clientName').value.trim();
+            const phone = document.getElementById('clientPhone').value.trim();
+            const email = document.getElementById('clientEmail').value.trim();
+            const orgType = document.getElementById('orgType').value;
+            const primaryService = document.getElementById('primaryService').value;
+            const details = document.getElementById('projectDetails').value.trim();
+
+            const supportModeRadio = document.querySelector('input[name="supportMode"]:checked');
+            const supportMode = supportModeRadio ? supportModeRadio.value : 'On-Site Installation / Visit';
+
+            // Gather all checked services + primary service (unique)
+            const checkedBoxes = Array.from(document.querySelectorAll('input[name="extraService"]:checked')).map(cb => cb.value);
+            const allServices = Array.from(new Set([primaryService, ...checkedBoxes]));
+
+            // Generate unique Reference ID
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const refId = `ZMIT-2026-${randomNum}`;
+            const now = new Date();
+            const timestamp = now.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const newInquiry = {
+                id: refId,
+                timestamp: timestamp,
+                name: name,
+                phone: phone,
+                email: email,
+                orgType: orgType,
+                services: allServices,
+                supportMode: supportMode,
+                details: details,
+                status: 'New Request'
+            };
+
+            // Save to localStorage list
+            const existing = getInquiries();
+            existing.unshift(newInquiry);
+            saveInquiries(existing);
+
+            // Populate Confirmation Modal
+            document.getElementById('modalRefId').textContent = `#${refId}`;
+            document.getElementById('modalTimestamp').textContent = timestamp;
+            document.getElementById('modalClientName').textContent = name;
+            document.getElementById('modalClientPhone').textContent = phone;
+            document.getElementById('modalClientEmail').textContent = email;
+            document.getElementById('modalOrgType').textContent = orgType;
+            document.getElementById('modalServicesList').textContent = allServices.join(' + ');
+            document.getElementById('modalSupportMode').textContent = supportMode;
+            document.getElementById('modalDetails').textContent = details;
+
+            // Pre-format WhatsApp direct message link
+            const waText = encodeURIComponent(
+                `*New Service Request - ZM IT Solutions*\n` +
+                `*Ref ID:* #${refId}\n` +
+                `*Name:* ${name} (${orgType})\n` +
+                `*Phone:* ${phone}\n` +
+                `*Services:* ${allServices.join(', ')}\n` +
+                `*Mode:* ${supportMode}\n` +
+                `*Details:* ${details}`
+            );
+            document.getElementById('modalWhatsAppBtn').href = `https://wa.me/923001234567?text=${waText}`;
+
+            // Show Modal
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            // Reset form fields for next entry
+            event.target.reset();
+            syncCheckboxWithPrimaryService();
+            showToast(`Request #${refId} submitted!`);
+        }
+
+        function closeConfirmationModal() {
+            const modal = document.getElementById('confirmationModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function scrollToInquiriesPanel() {
+            const panel = document.getElementById('inquiriesPanel');
+            if (panel) {
+                panel.scrollIntoView({ behavior: 'smooth' });
+                panel.classList.remove('form-pulse-highlight');
+                void panel.offsetWidth;
+                panel.classList.add('form-pulse-highlight');
+            }
+        }
+
+        // Interactive ZKTeco Biometric Terminal Demo
+        function simulateBiometricScan(keyPressed) {
+            const statusText = document.getElementById('zkStatusText');
+            const timeDisplay = document.getElementById('zkTimeDisplay');
+            const screen = document.getElementById('zkScreen');
+
+            if (!statusText || !screen) return;
+
+            if (keyPressed) {
+                statusText.textContent = `KEY [${keyPressed}] OK`;
+                statusText.className = 'text-xs font-bold text-amber-300 mt-0.5';
+            } else {
+                statusText.textContent = 'Verified: Check-In OK';
+                statusText.className = 'text-xs font-bold text-emerald-300 mt-0.5';
+                showToast('ZKTeco Terminal: Fingerprint Verified (10:08 Check-In)');
+            }
+
+            setTimeout(() => {
+                const now = new Date();
+                const hh = String(now.getHours()).padStart(2, '0');
+                const mm = String(now.getMinutes()).padStart(2, '0');
+                timeDisplay.textContent = `${hh}:${mm}`;
+                statusText.textContent = 'Welcome';
+                statusText.className = 'text-xs font-semibold text-sky-200 mt-0.5';
+            }, 2200);
+        }
+
+        // Mobile Navigation Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Toast Helper
+        let toastTimeout;
+        function showToast(message) {
+            const banner = document.getElementById('toastBanner');
+            const text = document.getElementById('toastMessage');
+            if (!banner || !text) return;
+
+            text.textContent = message;
+            banner.classList.remove('hidden');
+            banner.classList.add('flex');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                banner.classList.add('hidden');
+                banner.classList.remove('flex');
+            }, 3200);
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            syncCheckboxWithPrimaryService();
+            renderInquiriesList();
+        });
+    </script>
+</body>
+</html>
